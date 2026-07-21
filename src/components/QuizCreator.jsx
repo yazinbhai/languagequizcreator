@@ -236,7 +236,7 @@ export default function QuizCreator({ initialQuiz, onSave, onCancel }) {
 
           <div className="glass-panel p-6 border-l-4 border-amber-500">
             <h2 className="text-lg font-bold text-amber-400 mb-2 flex items-center gap-2">
-              <Award className="w-5 h-5" /> GamiPress Rewards & Badges
+              <Award className="w-5 h-5" /> Quiz Rewards & Badges
             </h2>
             <p className="text-xs text-slate-400 mb-3">Configure XP points and achievements awarded upon passing.</p>
             <div className="grid grid-cols-2 gap-3 mb-3">

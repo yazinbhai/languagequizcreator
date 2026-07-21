@@ -30,7 +30,7 @@ export default function UserProfileModal({ profile, onClose, onProfileUpdated })
             </div>
             <div>
               <h2 className="text-2xl font-bold text-white">Linguistic Adventurer</h2>
-              <p className="text-sm text-slate-400">GamiPress Rewards & Badges Vault</p>
+              <p className="text-sm text-slate-400">Rewards & Badges Vault</p>
             </div>
           </div>
 

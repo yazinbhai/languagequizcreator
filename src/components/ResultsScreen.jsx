@@ -25,7 +25,7 @@ export default function ResultsScreen({ quiz, score, total, onRetake, onBackToLi
         origin: { y: 0.6 }
       });
 
-      // Process GamiPress Rewards
+      // Process Rewards
       const res = awardRewards({
         quizId: quiz.id,
         quizTitle: quiz.title,
@@ -113,7 +113,7 @@ export default function ResultsScreen({ quiz, score, total, onRetake, onBackToLi
                     <h3 className="text-lg font-extrabold text-white">
                       {rewardResult.newBadgeUnlocked.title}
                     </h3>
-                    <p className="text-xs text-slate-300">Added to your GamiPress Badges Vault</p>
+                    <p className="text-xs text-slate-300">Added to your Badges Vault</p>
                   </div>
                 </div>
               </div>
