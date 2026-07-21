@@ -7,7 +7,7 @@ import QuizPlayer from './components/QuizPlayer';
 import ResultsScreen from './components/ResultsScreen';
 import UserProfileModal from './components/UserProfileModal';
 
-import { getQuizzes, saveQuiz, deleteQuiz, getUserProfile, getLevelInfo } from './services/quizStorage';
+import { getQuizzes, saveQuiz, deleteQuiz, getUserProfile, getLevelInfo, parseSharedQuizURL } from './services/quizStorage';
 import { soundFx } from './utils/audio';
 
 export default function App() {
@@ -17,12 +17,20 @@ export default function App() {
   const [selectedMode, setSelectedMode] = useState('mixed');
   const [editingQuiz, setEditingQuiz] = useState(null);
 
-  const [lastResults, setLastResults] = useState(null); // { score, total }
+  const [lastResults, setLastResults] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [isMuted, setIsMuted] = useState(soundFx.isMuted);
 
   useEffect(() => {
+    // Check if opening a shareable link
+    const sharedQuiz = parseSharedQuizURL();
+    if (sharedQuiz) {
+      setSelectedQuiz(sharedQuiz);
+      setSelectedMode('mixed');
+      setActiveView('player');
+    }
+
     refreshData();
   }, []);
 

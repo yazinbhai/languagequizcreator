@@ -177,6 +177,36 @@ export const deleteQuiz = (id) => {
   return updated;
 };
 
+// Shareable Direct Link Helpers
+export const generateShareableURL = (quiz) => {
+  try {
+    const jsonStr = JSON.stringify(quiz);
+    const encoded = btoa(encodeURIComponent(jsonStr));
+    const baseURL = window.location.origin + window.location.pathname;
+    return `${baseURL}?quiz=${encoded}`;
+  } catch (e) {
+    return window.location.href;
+  }
+};
+
+export const parseSharedQuizURL = () => {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const quizParam = params.get('quiz');
+    if (quizParam) {
+      const decodedStr = decodeURIComponent(atob(quizParam));
+      const quizObj = JSON.parse(decodedStr);
+      if (quizObj && quizObj.title && Array.isArray(quizObj.phrases)) {
+        saveQuiz(quizObj);
+        return quizObj;
+      }
+    }
+  } catch (e) {
+    console.error('Invalid shared quiz URL');
+  }
+  return null;
+};
+
 // Export & Import Quizzes (JSON File Backup)
 export const exportQuizzesJSON = () => {
   const quizzes = getQuizzes();
@@ -194,7 +224,6 @@ export const importQuizzesJSON = (jsonString) => {
     const imported = JSON.parse(jsonString);
     if (Array.isArray(imported)) {
       const existing = getQuizzes();
-      // Merge unique
       const existingIds = new Set(existing.map(q => q.id));
       const newItems = imported.filter(q => !existingIds.has(q.id));
       const merged = [...newItems, ...existing];

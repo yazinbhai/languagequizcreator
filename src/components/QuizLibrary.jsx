@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Plus, Eye, Headphones, BookOpen, Layers, Edit, Trash2, Zap, Star, Trophy, Clock, Filter, Download, Upload } from 'lucide-react';
-import { getFavorites, toggleFavorite, getHighScores, exportQuizzesJSON, importQuizzesJSON } from '../services/quizStorage';
+import { Play, Plus, Eye, Headphones, BookOpen, Layers, Edit, Trash2, Zap, Star, Trophy, Clock, Filter, Download, Upload, Share2, Check } from 'lucide-react';
+import { getFavorites, toggleFavorite, getHighScores, exportQuizzesJSON, importQuizzesJSON, generateShareableURL } from '../services/quizStorage';
 
 export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEditQuiz, onDeleteQuiz }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [favorites, setFavorites] = useState([]);
   const [highScores, setHighScores] = useState({});
+  const [copiedQuizId, setCopiedQuizId] = useState(null);
 
   useEffect(() => {
     setFavorites(getFavorites());
@@ -17,6 +18,14 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
     e.stopPropagation();
     const updated = toggleFavorite(quizId);
     setFavorites(updated);
+  };
+
+  const handleShareQuiz = (e, quiz) => {
+    e.stopPropagation();
+    const shareableURL = generateShareableURL(quiz);
+    navigator.clipboard.writeText(shareableURL);
+    setCopiedQuizId(quiz.id);
+    setTimeout(() => setCopiedQuizId(null), 2000);
   };
 
   const handleImportFile = (e) => {
@@ -113,6 +122,7 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
         {filteredQuizzes.map((quiz) => {
           const isFav = favorites.includes(quiz.id);
           const highScore = highScores[quiz.id];
+          const isCopied = copiedQuizId === quiz.id;
 
           return (
             <div
@@ -221,22 +231,36 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
                   </button>
                 </div>
 
-                {/* Admin Actions */}
-                <div className="flex items-center justify-end gap-2 pt-2 border-t border-white/5">
+                {/* Share Link & Admin Actions */}
+                <div className="flex items-center justify-between pt-2 border-t border-white/5">
                   <button
-                    onClick={() => onEditQuiz(quiz)}
-                    className="text-slate-400 hover:text-white text-xs flex items-center gap-1 p-1 hover:bg-white/5 rounded"
+                    onClick={(e) => handleShareQuiz(e, quiz)}
+                    className={`text-xs flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition ${
+                      isCopied
+                        ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300 font-bold'
+                        : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-300 hover:bg-indigo-500/20'
+                    }`}
                   >
-                    <Edit className="w-3.5 h-3.5" /> Edit
+                    {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5 text-sky-400" />}
+                    <span>{isCopied ? 'Link Copied!' : 'Share Link'}</span>
                   </button>
-                  <button
-                    onClick={() => {
-                      if (confirm(`Delete "${quiz.title}"?`)) onDeleteQuiz(quiz.id);
-                    }}
-                    className="text-slate-400 hover:text-rose-400 text-xs flex items-center gap-1 p-1 hover:bg-rose-500/10 rounded"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" /> Delete
-                  </button>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => onEditQuiz(quiz)}
+                      className="text-slate-400 hover:text-white text-xs flex items-center gap-1 p-1 hover:bg-white/5 rounded"
+                    >
+                      <Edit className="w-3.5 h-3.5" /> Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm(`Delete "${quiz.title}"?`)) onDeleteQuiz(quiz.id);
+                      }}
+                      className="text-slate-400 hover:text-rose-400 text-xs flex items-center gap-1 p-1 hover:bg-rose-500/10 rounded"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" /> Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
