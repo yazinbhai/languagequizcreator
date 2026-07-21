@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Plus, Eye, Headphones, BookOpen, Layers, Edit, Trash2, Zap, Star, Trophy, Clock, Filter } from 'lucide-react';
-import { getFavorites, toggleFavorite, getHighScores } from '../services/quizStorage';
+import { Play, Plus, Eye, Headphones, BookOpen, Layers, Edit, Trash2, Zap, Star, Trophy, Clock, Filter, Download, Upload } from 'lucide-react';
+import { getFavorites, toggleFavorite, getHighScores, exportQuizzesJSON, importQuizzesJSON } from '../services/quizStorage';
 
 export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEditQuiz, onDeleteQuiz }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,6 +17,20 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
     e.stopPropagation();
     const updated = toggleFavorite(quizId);
     setFavorites(updated);
+  };
+
+  const handleImportFile = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result;
+      if (content) {
+        importQuizzesJSON(content);
+        window.location.reload();
+      }
+    };
+    reader.readAsText(file);
   };
 
   const categories = ['All', 'Favorites', 'Beginner', 'Advanced'];
@@ -59,6 +73,16 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+
+          <button onClick={exportQuizzesJSON} className="btn-outline text-xs py-2 px-3" title="Export Quizzes to JSON File">
+            <Download className="w-4 h-4 text-sky-400" /> Export JSON
+          </button>
+
+          <label className="btn-outline text-xs py-2 px-3 cursor-pointer" title="Import Quizzes from JSON File">
+            <Upload className="w-4 h-4 text-emerald-400" /> Import JSON
+            <input type="file" accept=".json" onChange={handleImportFile} className="hidden" />
+          </label>
+
           <button onClick={onCreateNew} className="btn-primary whitespace-nowrap w-full sm:w-auto justify-center">
             <Plus className="w-4 h-4" /> Create Quiz
           </button>
