@@ -14,6 +14,7 @@ export default function App() {
   const [quizzes, setQuizzes] = useState([]);
   const [activeView, setActiveView] = useState('library'); // 'library' | 'creator' | 'player' | 'results'
   const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [selectedSubQuiz, setSelectedSubQuiz] = useState(null);
   const [selectedMode, setSelectedMode] = useState('mixed');
   const [editingQuiz, setEditingQuiz] = useState(null);
 
@@ -27,6 +28,7 @@ export default function App() {
     const sharedQuiz = parseSharedQuizURL();
     if (sharedQuiz) {
       setSelectedQuiz(sharedQuiz);
+      setSelectedSubQuiz(null);
       setSelectedMode('mixed');
       setActiveView('player');
     }
@@ -66,8 +68,9 @@ export default function App() {
     setEditingQuiz(null);
   };
 
-  const handleSelectQuiz = (quiz, mode = 'mixed') => {
+  const handleSelectQuiz = (quiz, mode = 'mixed', subQuiz = null) => {
     setSelectedQuiz(quiz);
+    setSelectedSubQuiz(subQuiz);
     setSelectedMode(mode);
     setActiveView('player');
   };
@@ -81,6 +84,7 @@ export default function App() {
   const handleBackToLibrary = () => {
     setActiveView('library');
     setSelectedQuiz(null);
+    setSelectedSubQuiz(null);
     setLastResults(null);
     refreshData();
   };
@@ -102,8 +106,8 @@ export default function App() {
           <div>
             <h1 className="text-xl font-black tracking-tight text-white flex items-center gap-2">
               Language Quiz Creator
-              <span className="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2 py-0.5 rounded-full uppercase font-bold">
-                V2.7 Pro UX
+              <span className="text-[11px] font-semibold bg-indigo-500/15 text-indigo-300 border border-indigo-500/25 px-2.5 py-0.5 rounded-full">
+                Studio
               </span>
             </h1>
             <p className="text-[11px] text-slate-400 hidden sm:block">Master Languages with Visual, Audio & Matching Quizzes</p>
@@ -201,6 +205,7 @@ export default function App() {
         {activeView === 'player' && selectedQuiz && (
           <QuizPlayer
             quiz={selectedQuiz}
+            subQuiz={selectedSubQuiz}
             mode={selectedMode}
             onFinish={handleFinishQuiz}
             onExit={handleBackToLibrary}
@@ -210,6 +215,7 @@ export default function App() {
         {activeView === 'results' && selectedQuiz && lastResults && (
           <ResultsScreen
             quiz={selectedQuiz}
+            subQuiz={selectedSubQuiz}
             score={lastResults.score}
             total={lastResults.total}
             onRetake={() => setActiveView('player')}

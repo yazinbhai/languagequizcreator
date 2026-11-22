@@ -10,59 +10,97 @@ export const VOCAB_PRESETS = [
     name: 'French Bistro & Food 🥐',
     userLang: 'English',
     targetLang: 'French',
-    gpConfig: {
-      type: 'french_xp',
-      amount: 45,
-      passPercent: 70,
-      achievementId: 201,
-      badgeTitle: 'French Gourmet Badge',
-      badgeIcon: '🇫🇷'
-    },
+    passPercent: 70,
+    xpAmount: 45,
+    subQuizzes: [
+      {
+        number: 1,
+        title: 'Bistro Food & Drinks',
+        phrases: [
+          { id: 'fr-1', en: 'Croissant', ml: 'Le croissant', blankWord: 'croissant', blankOptions: ['croissant', 'café', 'fromage', 'pain'], imageUrl: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'fr-2', en: 'Coffee', ml: 'Le café', blankWord: 'café', blankOptions: ['café', 'thé', 'lait', 'vin'], imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'fr-3', en: 'Wine', ml: 'Le vin', blankWord: 'vin', blankOptions: ['vin', 'eau', 'jus', 'bière'], imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      },
+      {
+        number: 2,
+        title: 'Greetings & Courtesies',
+        phrases: [
+          { id: 'fr-4', en: 'Cheese', ml: 'Le fromage', blankWord: 'fromage', blankOptions: ['fromage', 'beurre', 'pain', 'pomme'], imageUrl: 'https://images.unsplash.com/photo-1452195100486-9cc805987862?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'fr-5', en: 'Thank you very much', ml: 'Merci beaucoup', blankWord: 'beaucoup', blankOptions: ['beaucoup', 'bien', 'toujours', 'jamais'], imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'fr-6', en: 'Good morning / Hello', ml: 'Bonjour', blankWord: 'Bonjour', blankOptions: ['Bonjour', 'Bonsoir', 'Au revoir', 'Salut'], imageUrl: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      }
+    ],
     phrases: [
-      { id: 'fr-1', en: 'Croissant', ml: 'Le croissant', imageUrl: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'fr-2', en: 'Coffee', ml: 'Le café', imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'fr-3', en: 'Wine', ml: 'Le vin', imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'fr-4', en: 'Cheese', ml: 'Le fromage', imageUrl: 'https://images.unsplash.com/photo-1452195100486-9cc805987862?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'fr-5', en: 'Thank you very much', ml: 'Merci beaucoup', imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'fr-6', en: 'Good morning / Hello', ml: 'Bonjour', imageUrl: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+      { id: 'fr-1', en: 'Croissant', ml: 'Le croissant', blankWord: 'croissant', blankOptions: ['croissant', 'café', 'fromage', 'pain'], imageUrl: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'fr-2', en: 'Coffee', ml: 'Le café', blankWord: 'café', blankOptions: ['café', 'thé', 'lait', 'vin'], imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'fr-3', en: 'Wine', ml: 'Le vin', blankWord: 'vin', blankOptions: ['vin', 'eau', 'jus', 'bière'], imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'fr-4', en: 'Cheese', ml: 'Le fromage', blankWord: 'fromage', blankOptions: ['fromage', 'beurre', 'pain', 'pomme'], imageUrl: 'https://images.unsplash.com/photo-1452195100486-9cc805987862?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'fr-5', en: 'Thank you very much', ml: 'Merci beaucoup', blankWord: 'beaucoup', blankOptions: ['beaucoup', 'bien', 'toujours', 'jamais'], imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'fr-6', en: 'Good morning / Hello', ml: 'Bonjour', blankWord: 'Bonjour', blankOptions: ['Bonjour', 'Bonsoir', 'Au revoir', 'Salut'], imageUrl: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
     ]
   },
   {
     name: 'Italian Travel & Greetings 🇮🇹',
     userLang: 'English',
     targetLang: 'Italian',
-    gpConfig: {
-      type: 'italian_xp',
-      amount: 40,
-      passPercent: 70,
-      achievementId: 202,
-      badgeTitle: 'Italian Explorer Badge',
-      badgeIcon: '🇮🇹'
-    },
+    passPercent: 70,
+    xpAmount: 40,
+    subQuizzes: [
+      {
+        number: 1,
+        title: 'Italian Dining',
+        phrases: [
+          { id: 'it-1', en: 'Pizza', ml: 'La pizza', blankWord: 'pizza', blankOptions: ['pizza', 'pasta', 'torta', 'insalata'], imageUrl: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'it-4', en: 'Beautiful', ml: 'Bellissimo', blankWord: 'Bellissimo', blankOptions: ['Bellissimo', 'Bravissimo', 'Carino', 'Buono'], imageUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      },
+      {
+        number: 2,
+        title: 'Italian Greetings',
+        phrases: [
+          { id: 'it-2', en: 'Hello / Bye', ml: 'Ciao', blankWord: 'Ciao', blankOptions: ['Ciao', 'Grazie', 'Prego', 'Scusa'], imageUrl: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'it-3', en: 'See you later', ml: 'Arrivederci', blankWord: 'Arrivederci', blankOptions: ['Arrivederci', 'Buongiorno', 'Buonasera', 'Notte'], imageUrl: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      }
+    ],
     phrases: [
-      { id: 'it-1', en: 'Pizza', ml: 'La pizza', imageUrl: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'it-2', en: 'Hello / Bye', ml: 'Ciao', imageUrl: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'it-3', en: 'See you later', ml: 'Arrivederci', imageUrl: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'it-4', en: 'Beautiful', ml: 'Bellissimo', imageUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+      { id: 'it-1', en: 'Pizza', ml: 'La pizza', blankWord: 'pizza', blankOptions: ['pizza', 'pasta', 'torta', 'insalata'], imageUrl: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'it-2', en: 'Hello / Bye', ml: 'Ciao', blankWord: 'Ciao', blankOptions: ['Ciao', 'Grazie', 'Prego', 'Scusa'], imageUrl: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'it-3', en: 'See you later', ml: 'Arrivederci', blankWord: 'Arrivederci', blankOptions: ['Arrivederci', 'Buongiorno', 'Buonasera', 'Notte'], imageUrl: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'it-4', en: 'Beautiful', ml: 'Bellissimo', blankWord: 'Bellissimo', blankOptions: ['Bellissimo', 'Bravissimo', 'Carino', 'Buono'], imageUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
     ]
   },
   {
     name: 'Malayalam Basics 🌴',
     userLang: 'English',
     targetLang: 'Malayalam',
-    gpConfig: {
-      type: 'malayalam_xp',
-      amount: 50,
-      passPercent: 75,
-      achievementId: 203,
-      badgeTitle: 'Kerala Explorer Badge',
-      badgeIcon: '🌴'
-    },
+    passPercent: 75,
+    xpAmount: 50,
+    subQuizzes: [
+      {
+        number: 1,
+        title: 'Greetings & Thanks',
+        phrases: [
+          { id: 'ml-1', en: 'Hello / Greetings', ml: 'നമസ്കാരം (Namaskaram)', blankWord: 'നമസ്കാരം', blankOptions: ['നമസ്കാരം', 'നന്ദി', 'സ്വാഗതം', 'സുഖം'], imageUrl: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'ml-2', en: 'Thank you', ml: 'നന്ദി (Nandi)', blankWord: 'നന്ദി', blankOptions: ['നന്ദി', 'നമസ്കാരം', 'ക്ഷമിക്കണം', 'ശരി'], imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      },
+      {
+        number: 2,
+        title: 'Water & Tea',
+        phrases: [
+          { id: 'ml-3', en: 'Water', ml: 'വെള്ളം (Vellam)', blankWord: 'വെള്ളം', blankOptions: ['വെള്ളം', 'ചായ', 'പാൽ', 'പഴം'], imageUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'ml-4', en: 'Tea', ml: 'ചായ (Chaaya)', blankWord: 'ചായ', blankOptions: ['ചായ', 'കാപ്പി', 'വെള്ളം', 'ജ്യൂസ്'], imageUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      }
+    ],
     phrases: [
-      { id: 'ml-1', en: 'Hello / Greetings', ml: 'നമസ്കാരം (Namaskaram)', imageUrl: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'ml-2', en: 'Thank you', ml: 'നന്ദി (Nandi)', imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'ml-3', en: 'Water', ml: 'വെള്ളം (Vellam)', imageUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'ml-4', en: 'Tea', ml: 'ചായ (Chaaya)', imageUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+      { id: 'ml-1', en: 'Hello / Greetings', ml: 'നമസ്കാരം (Namaskaram)', blankWord: 'നമസ്കാരം', blankOptions: ['നമസ്കാരം', 'നന്ദി', 'സ്വാഗതം', 'സുഖം'], imageUrl: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'ml-2', en: 'Thank you', ml: 'നന്ദി (Nandi)', blankWord: 'നന്ദി', blankOptions: ['നന്ദി', 'നമസ്കാരം', 'ക്ഷമിക്കണം', 'ശരി'], imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'ml-3', en: 'Water', ml: 'വെള്ളം (Vellam)', blankWord: 'വെള്ളം', blankOptions: ['വെള്ളം', 'ചായ', 'പാൽ', 'പഴം'], imageUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'ml-4', en: 'Tea', ml: 'ചായ (Chaaya)', blankWord: 'ചായ', blankOptions: ['ചായ', 'കാപ്പി', 'വെള്ളം', 'ജ്യൂസ്'], imageUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
     ]
   }
 ];
@@ -74,22 +112,40 @@ export const INITIAL_QUIZZES = [
     userLang: 'English',
     targetLang: 'Spanish',
     category: 'Beginner',
-    config: { visual: 4, audio: 4, matching: 4, total: 12 },
-    gpConfig: {
-      type: 'spanish_xp',
-      amount: 50,
-      passPercent: 70,
-      achievementId: 101,
-      badgeTitle: 'Spanish Conquistador Badge',
-      badgeIcon: '🇪🇸'
-    },
+    passPercent: 70,
+    xpAmount: 50,
+    config: { visual: 3, audio: 3, matching: 3, speech: 3, blanks: 3, imageSpeech: 3, total: 18 },
+    subQuizzes: [
+      {
+        id: 'sp-sq1',
+        number: 1,
+        title: 'Food & Animals',
+        config: { visual: 2, audio: 2, matching: 2, speech: 2, blanks: 2, imageSpeech: 2, total: 12 },
+        phrases: [
+          { id: 'sp-1', en: 'Apple', ml: 'La manzana', blankWord: 'manzana', blankOptions: ['manzana', 'naranja', 'pera', 'uva'], imageUrl: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'sp-2', en: 'Cat', ml: 'El gato', blankWord: 'gato', blankOptions: ['gato', 'perro', 'ratón', 'pájaro'], imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'sp-3', en: 'Dog', ml: 'El perro', blankWord: 'perro', blankOptions: ['perro', 'gato', 'caballo', 'conejo'], imageUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      },
+      {
+        id: 'sp-sq2',
+        number: 2,
+        title: 'Drinks & Greetings',
+        config: { visual: 2, audio: 2, matching: 2, speech: 2, blanks: 2, imageSpeech: 2, total: 12 },
+        phrases: [
+          { id: 'sp-4', en: 'Water', ml: 'El agua', blankWord: 'agua', blankOptions: ['agua', 'leche', 'jugo', 'café'], imageUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'sp-5', en: 'Hello', ml: 'Hola', blankWord: 'Hola', blankOptions: ['Hola', 'Adiós', 'Gracias', 'Por favor'], imageUrl: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'sp-6', en: 'Thank you', ml: 'Gracias', blankWord: 'Gracias', blankOptions: ['Gracias', 'De nada', 'Por favor', 'Disculpa'], imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      }
+    ],
     phrases: [
-      { id: 'sp-1', en: 'Apple', ml: 'La manzana', imageUrl: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'sp-2', en: 'Cat', ml: 'El gato', imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'sp-3', en: 'Dog', ml: 'El perro', imageUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'sp-4', en: 'Water', ml: 'El agua', imageUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'sp-5', en: 'Hello', ml: 'Hola', imageUrl: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'sp-6', en: 'Thank you', ml: 'Gracias', imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+      { id: 'sp-1', en: 'Apple', ml: 'La manzana', blankWord: 'manzana', blankOptions: ['manzana', 'naranja', 'pera', 'uva'], imageUrl: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'sp-2', en: 'Cat', ml: 'El gato', blankWord: 'gato', blankOptions: ['gato', 'perro', 'ratón', 'pájaro'], imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'sp-3', en: 'Dog', ml: 'El perro', blankWord: 'perro', blankOptions: ['perro', 'gato', 'caballo', 'conejo'], imageUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'sp-4', en: 'Water', ml: 'El agua', blankWord: 'agua', blankOptions: ['agua', 'leche', 'jugo', 'café'], imageUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'sp-5', en: 'Hello', ml: 'Hola', blankWord: 'Hola', blankOptions: ['Hola', 'Adiós', 'Gracias', 'Por favor'], imageUrl: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'sp-6', en: 'Thank you', ml: 'Gracias', blankWord: 'Gracias', blankOptions: ['Gracias', 'De nada', 'Por favor', 'Disculpa'], imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
     ]
   },
   {
@@ -98,20 +154,36 @@ export const INITIAL_QUIZZES = [
     userLang: 'English',
     targetLang: 'German',
     category: 'Beginner',
-    config: { visual: 3, audio: 3, matching: 3, total: 9 },
-    gpConfig: {
-      type: 'german_points',
-      amount: 40,
-      passPercent: 66,
-      achievementId: 102,
-      badgeTitle: 'German Meister Badge',
-      badgeIcon: '🇩🇪'
-    },
+    passPercent: 66,
+    xpAmount: 40,
+    config: { visual: 2, audio: 2, matching: 2, speech: 2, blanks: 2, imageSpeech: 2, total: 12 },
+    subQuizzes: [
+      {
+        id: 'de-sq1',
+        number: 1,
+        title: 'Food & Nature',
+        config: { visual: 2, audio: 2, matching: 2, speech: 2, blanks: 2, imageSpeech: 2, total: 12 },
+        phrases: [
+          { id: 'de-1', en: 'Bread', ml: 'Das Brot', blankWord: 'Brot', blankOptions: ['Brot', 'Wasser', 'Käse', 'Apfel'], imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'de-2', en: 'Coffee', ml: 'Der Kaffee', blankWord: 'Kaffee', blankOptions: ['Kaffee', 'Tee', 'Wein', 'Saft'], imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      },
+      {
+        id: 'de-sq2',
+        number: 2,
+        title: 'Greetings & Time',
+        config: { visual: 2, audio: 2, matching: 2, speech: 2, blanks: 2, imageSpeech: 2, total: 12 },
+        phrases: [
+          { id: 'de-3', en: 'Sun', ml: 'Die Sonne', blankWord: 'Sonne', blankOptions: ['Sonne', 'Mond', 'Erde', 'Wolke'], imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'de-4', en: 'Good evening', ml: 'Guten Abend', blankWord: 'Abend', blankOptions: ['Abend', 'Morgen', 'Tag', 'Nacht'], imageUrl: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      }
+    ],
     phrases: [
-      { id: 'de-1', en: 'Bread', ml: 'Das Brot', imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'de-2', en: 'Coffee', ml: 'Der Kaffee', imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'de-3', en: 'Sun', ml: 'Die Sonne', imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'de-4', en: 'Good evening', ml: 'Guten Abend', imageUrl: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+      { id: 'de-1', en: 'Bread', ml: 'Das Brot', blankWord: 'Brot', blankOptions: ['Brot', 'Wasser', 'Käse', 'Apfel'], imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'de-2', en: 'Coffee', ml: 'Der Kaffee', blankWord: 'Kaffee', blankOptions: ['Kaffee', 'Tee', 'Wein', 'Saft'], imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'de-3', en: 'Sun', ml: 'Die Sonne', blankWord: 'Sonne', blankOptions: ['Sonne', 'Mond', 'Erde', 'Wolke'], imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'de-4', en: 'Good evening', ml: 'Guten Abend', blankWord: 'Abend', blankOptions: ['Abend', 'Morgen', 'Tag', 'Nacht'], imageUrl: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
     ]
   },
   {
@@ -120,34 +192,97 @@ export const INITIAL_QUIZZES = [
     userLang: 'English',
     targetLang: 'Japanese',
     category: 'Advanced',
-    config: { visual: 3, audio: 3, matching: 3, total: 9 },
-    gpConfig: {
-      type: 'japanese_xp',
-      amount: 60,
-      passPercent: 75,
-      achievementId: 103,
-      badgeTitle: 'Samurai Linguist Badge',
-      badgeIcon: '🇯🇵'
-    },
+    passPercent: 75,
+    xpAmount: 60,
+    config: { visual: 2, audio: 2, matching: 2, speech: 2, blanks: 2, imageSpeech: 2, total: 12 },
+    subQuizzes: [
+      {
+        id: 'jp-sq1',
+        number: 1,
+        title: 'Items & Surroundings',
+        config: { visual: 2, audio: 2, matching: 2, speech: 2, blanks: 2, imageSpeech: 2, total: 12 },
+        phrases: [
+          { id: 'jp-1', en: 'Tea', ml: 'お茶 (Ocha)', blankWord: 'お茶', blankOptions: ['お茶', '水', '酒', '牛乳'], imageUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'jp-2', en: 'Book', ml: '本 (Hon)', blankWord: '本', blankOptions: ['本', '新聞', '手紙', '写真'], imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      },
+      {
+        id: 'jp-sq2',
+        number: 2,
+        title: 'Greetings & Nature',
+        config: { visual: 2, audio: 2, matching: 2, speech: 2, blanks: 2, imageSpeech: 2, total: 12 },
+        phrases: [
+          { id: 'jp-3', en: 'Mountain', ml: '山 (Yama)', blankWord: '山', blankOptions: ['山', '川', '海', '空'], imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+          { id: 'jp-4', en: 'Good afternoon', ml: 'こんにちは (Konnichiwa)', blankWord: 'こんにちは', blankOptions: ['こんにちは', 'おはよう', 'こんばんは', 'さようなら'], imageUrl: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+        ]
+      }
+    ],
     phrases: [
-      { id: 'jp-1', en: 'Tea', ml: 'お茶 (Ocha)', imageUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'jp-2', en: 'Book', ml: '本 (Hon)', imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'jp-3', en: 'Mountain', ml: '山 (Yama)', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
-      { id: 'jp-4', en: 'Good afternoon', ml: 'こんにちは (Konnichiwa)', imageUrl: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
+      { id: 'jp-1', en: 'Tea', ml: 'お茶 (Ocha)', blankWord: 'お茶', blankOptions: ['お茶', '水', '酒', '牛乳'], imageUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'jp-2', en: 'Book', ml: '本 (Hon)', blankWord: '本', blankOptions: ['本', '新聞', '手紙', '写真'], imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'jp-3', en: 'Mountain', ml: '山 (Yama)', blankWord: '山', blankOptions: ['山', '川', '海', '空'], imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' },
+      { id: 'jp-4', en: 'Good afternoon', ml: 'こんにちは (Konnichiwa)', blankWord: 'こんにちは', blankOptions: ['こんにちは', 'おはよう', 'こんばんは', 'さようなら'], imageUrl: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=400&auto=format&fit=crop&q=80', audioUrlUserLang: '', audioUrlTargetLang: '' }
     ]
   }
 ];
 
+export const normalizeQuiz = (quiz) => {
+  if (!quiz) return null;
+  const cloned = { ...quiz };
+  cloned.targetOnly = Boolean(cloned.targetOnly);
+
+  const normalizeConfig = (cfg) => {
+    const c = cfg || {};
+    return {
+      visual: Number(c.visual ?? 2),
+      audio: Number(c.audio ?? 2),
+      matching: Number(c.matching ?? 2),
+      speech: Number(c.speech ?? c.speaking ?? 2),
+      blanks: Number(c.blanks ?? 2),
+      imageSpeech: Number(c.imageSpeech ?? c.imgSpeech ?? c.image_speech ?? 2),
+      total: Number(c.total ?? 12)
+    };
+  };
+
+  if (!Array.isArray(cloned.subQuizzes) || cloned.subQuizzes.length === 0) {
+    const rawPhrases = Array.isArray(cloned.phrases) ? cloned.phrases : [];
+    cloned.subQuizzes = [
+      {
+        id: `${cloned.id || 'quiz'}-sq1`,
+        number: 1,
+        title: 'Core Vocabulary',
+        config: normalizeConfig(cloned.config),
+        phrases: rawPhrases
+      }
+    ];
+  } else {
+    cloned.subQuizzes = cloned.subQuizzes.map((sq, idx) => ({
+      ...sq,
+      id: sq.id || `${cloned.id || 'quiz'}-sq${idx + 1}`,
+      number: idx + 1,
+      title: sq.title || `Topic ${idx + 1}`,
+      phrases: Array.isArray(sq.phrases) ? sq.phrases : [],
+      config: normalizeConfig(sq.config || cloned.config)
+    }));
+  }
+
+  // Keep flattened phrases array for overall quiz mixed play & compatibility
+  cloned.phrases = cloned.subQuizzes.flatMap(sq => sq.phrases || []);
+  return cloned;
+};
+
 export const getQuizzes = () => {
   const data = localStorage.getItem(STORAGE_KEY_QUIZZES);
   if (!data) {
-    localStorage.setItem(STORAGE_KEY_QUIZZES, JSON.stringify(INITIAL_QUIZZES));
-    return INITIAL_QUIZZES;
+    const initialNormalized = INITIAL_QUIZZES.map(normalizeQuiz);
+    localStorage.setItem(STORAGE_KEY_QUIZZES, JSON.stringify(initialNormalized));
+    return initialNormalized;
   }
   try {
-    return JSON.parse(data);
-  } catch (e) {
-    return INITIAL_QUIZZES;
+    const parsed = JSON.parse(data);
+    return parsed.map(normalizeQuiz);
+  } catch {
+    return INITIAL_QUIZZES.map(normalizeQuiz);
   }
 };
 
@@ -157,14 +292,15 @@ export const getQuizById = (id) => {
 };
 
 export const saveQuiz = (quizData) => {
+  const normalized = normalizeQuiz(quizData);
   const quizzes = getQuizzes();
-  const existingIndex = quizzes.findIndex(q => q.id === quizData.id);
+  const existingIndex = quizzes.findIndex(q => q.id === normalized.id);
   let updated;
   if (existingIndex >= 0) {
     updated = [...quizzes];
-    updated[existingIndex] = quizData;
+    updated[existingIndex] = normalized;
   } else {
-    updated = [quizData, ...quizzes];
+    updated = [normalized, ...quizzes];
   }
   localStorage.setItem(STORAGE_KEY_QUIZZES, JSON.stringify(updated));
   return updated;
@@ -298,15 +434,13 @@ export const getLevelInfo = (totalXP = 0) => {
   };
 };
 
-// Clean Default Profile for New Users (Starts at 0 XP, Level 1)
+// User Profile Service
 export const getUserProfile = () => {
   const data = localStorage.getItem(STORAGE_KEY_USER_PROFILE);
   const defaultProfile = {
     totalPoints: 0,
-    pointsByType: {},
     quizzesCompleted: 0,
-    streakDays: 0,
-    achievements: []
+    streakDays: 0
   };
 
   if (!data) {
@@ -324,49 +458,26 @@ export const getUserProfile = () => {
 export const resetUserProfile = () => {
   const emptyProfile = {
     totalPoints: 0,
-    pointsByType: {},
     quizzesCompleted: 0,
-    streakDays: 0,
-    achievements: []
+    streakDays: 0
   };
   localStorage.setItem(STORAGE_KEY_USER_PROFILE, JSON.stringify(emptyProfile));
   localStorage.removeItem(STORAGE_KEY_HIGH_SCORES);
   return emptyProfile;
 };
 
-export const awardRewards = ({ quizId, quizTitle, gpConfig }) => {
+export const awardRewards = ({ quizId, xpAmount }) => {
   const profile = getUserProfile();
-  const { type, amount, achievementId, badgeTitle, badgeIcon } = gpConfig || {};
+  const pointsAdded = xpAmount || 50;
 
-  let pointsAdded = 0;
-  let newBadgeUnlocked = null;
-
-  if (type && amount) {
-    profile.pointsByType[type] = (profile.pointsByType[type] || 0) + amount;
-    profile.totalPoints += amount;
-    pointsAdded = amount;
-  }
-
+  profile.totalPoints += pointsAdded;
   profile.quizzesCompleted += 1;
   profile.streakDays = Math.max(1, profile.streakDays + 1);
-
-  if (achievementId && !profile.achievements.some(a => a.id === achievementId)) {
-    newBadgeUnlocked = {
-      id: achievementId,
-      quizTitle: quizTitle || 'Language Quiz',
-      title: badgeTitle || `Achievement #${achievementId}`,
-      icon: badgeIcon || '🏆',
-      unlockedAt: new Date().toLocaleDateString()
-    };
-    profile.achievements.push(newBadgeUnlocked);
-  }
 
   localStorage.setItem(STORAGE_KEY_USER_PROFILE, JSON.stringify(profile));
 
   return {
     profile,
-    pointsAdded,
-    pointsType: type,
-    newBadgeUnlocked
+    pointsAdded
   };
 };

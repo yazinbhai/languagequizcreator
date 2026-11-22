@@ -1,179 +1,212 @@
-/* App Layout & Utility Classes */
+/* App Layout & Design System Tokens */
 
 .glass-panel {
-  background: rgba(19, 27, 46, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.5);
 }
 
 .glass-card {
-  background: rgba(30, 41, 59, 0.6);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(22, 32, 54, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  background: rgba(51, 65, 85, 0.75);
-  border-color: rgba(99, 102, 241, 0.4);
+  background: rgba(30, 43, 70, 0.65);
+  border-color: rgba(99, 102, 241, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(99, 102, 241, 0.15);
 }
 
+/* Button System: Step on hover, press on click */
 .btn-primary {
   background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-  color: white;
+  color: #ffffff;
   font-weight: 600;
-  padding: 0.65rem 1.25rem;
+  padding: 0.625rem 1.25rem;
   border-radius: 12px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 14px rgba(79, 70, 229, 0.35);
+  user-select: none;
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 6px 20px rgba(99, 102, 241, 0.5);
   background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0.5px) scale(0.99);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1), 0 2px 6px rgba(79, 70, 229, 0.3);
 }
 
 .btn-secondary {
   background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  color: white;
+  color: #ffffff;
   font-weight: 600;
-  padding: 0.65rem 1.25rem;
+  padding: 0.625rem 1.25rem;
   border-radius: 12px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 14px rgba(14, 165, 233, 0.35);
+  user-select: none;
 }
 
 .btn-secondary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 6px 20px rgba(14, 165, 233, 0.5);
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+}
+
+.btn-secondary:active {
+  transform: translateY(0.5px) scale(0.99);
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.05);
-  color: #f8fafc;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   font-weight: 600;
-  padding: 0.65rem 1.25rem;
+  padding: 0.625rem 1.25rem;
   border-radius: 12px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
+.btn-outline:active {
+  transform: translateY(0.5px) scale(0.99);
+}
+
+/* Badge Tags with High Contrast */
 .badge-tag {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .badge-purple {
-  background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(168, 85, 247, 0.12);
+  color: #d8b4fe;
+  border: 1px solid rgba(168, 85, 247, 0.28);
 }
 
 .badge-blue {
-  background: rgba(14, 165, 233, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(14, 165, 233, 0.3);
+  background: rgba(14, 165, 233, 0.12);
+  color: #7dd3fc;
+  border: 1px solid rgba(14, 165, 233, 0.28);
 }
 
 .badge-amber {
-  background: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.12);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.28);
 }
 
 .badge-emerald {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.12);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.28);
 }
 
+/* Form Inputs */
 .input-field {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  background: rgba(11, 17, 33, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
   color: #f8fafc;
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
+  font-size: 0.92rem;
+  transition: all 0.18s ease;
 }
 
 .input-field:focus {
   outline: none;
   border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+.input-field::placeholder {
+  color: #64748b;
 }
 
 /* Matching Card Styles */
 .match-card {
-  padding: 1.25rem 1rem;
-  border-radius: 12px;
-  background: rgba(30, 41, 59, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.12);
+  padding: 1.15rem 1rem;
+  border-radius: 14px;
+  background: rgba(24, 34, 58, 0.75);
+  border: 2px solid rgba(255, 255, 255, 0.09);
   color: #f8fafc;
   font-weight: 600;
   text-align: center;
   cursor: pointer;
   user-select: none;
-  transition: all 0.2s ease;
-  min-height: 70px;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .match-card:hover {
-  border-color: #0ea5e9;
-  background: rgba(14, 165, 233, 0.15);
+  border-color: rgba(56, 189, 248, 0.6);
+  background: rgba(14, 165, 233, 0.12);
+  transform: translateY(-1px);
 }
 
 .match-card.selected {
   border-color: #6366f1;
-  background: rgba(99, 102, 241, 0.3);
-  box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+  background: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), inset 0 0 10px rgba(99, 102, 241, 0.2);
+  transform: scale(1.02);
 }
 
 .match-card.matched {
   border-color: #10b981;
-  background: rgba(16, 185, 129, 0.2);
-  color: #34d399;
-  opacity: 0.6;
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  opacity: 0.65;
   cursor: default;
+  transform: none;
 }
 
 .match-card.wrong {
-  border-color: #ef4444;
-  background: rgba(239, 68, 68, 0.2);
+  border-color: #f43f5e;
+  background: rgba(244, 63, 94, 0.2);
+  color: #fecdd3;
 }

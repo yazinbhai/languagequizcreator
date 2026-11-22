@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Award, Zap, RefreshCw, ArrowLeft, CheckCircle2, ShieldCheck, Flame, Trophy } from 'lucide-react';
+import { Zap, RefreshCw, ArrowLeft } from 'lucide-react';
 import { soundFx } from '../utils/audio';
 import { awardRewards, recordHighScore } from '../services/quizStorage';
 
-export default function ResultsScreen({ quiz, score, total, onRetake, onBackToLibrary }) {
+export default function ResultsScreen({ quiz, subQuiz = null, score, total, onRetake, onBackToLibrary }) {
   const percentage = Math.round((score / total) * 100);
-  const passPercent = quiz.gpConfig?.passPercent ?? 70;
+  const passPercent = quiz.passPercent || 70;
   const isPassed = percentage >= passPercent;
 
   const [rewardResult, setRewardResult] = useState(null);
@@ -28,8 +28,7 @@ export default function ResultsScreen({ quiz, score, total, onRetake, onBackToLi
       // Process Rewards
       const res = awardRewards({
         quizId: quiz.id,
-        quizTitle: quiz.title,
-        gpConfig: quiz.gpConfig
+        xpAmount: quiz.xpAmount || 50
       });
       setRewardResult(res);
     } else {
@@ -48,8 +47,14 @@ export default function ResultsScreen({ quiz, score, total, onRetake, onBackToLi
         />
 
         {/* Status Header */}
-        <div className="inline-flex p-4 rounded-3xl bg-slate-950/50 border border-white/10 mb-6 shadow-inner">
+        <div className="inline-flex p-4 rounded-3xl bg-slate-950/50 border border-white/10 mb-4 shadow-inner">
           <div className="text-4xl">{isPassed ? '🎉' : '💪'}</div>
+        </div>
+
+        <div className="mb-2">
+          <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">
+            {quiz.title} • {subQuiz ? (subQuiz.title || 'Sub-Quiz') : 'All Sub-Quizzes'}
+          </span>
         </div>
 
         <h1 className="text-3xl font-extrabold text-white mb-2">
@@ -58,7 +63,7 @@ export default function ResultsScreen({ quiz, score, total, onRetake, onBackToLi
         <p className="text-sm text-slate-400 mb-6">
           {isPassed
             ? `Outstanding work! You scored above the ${passPercent}% passing threshold.`
-            : `You scored ${percentage}%. You need ${passPercent}% to pass and unlock rewards.`}
+            : `You scored ${percentage}%. You need ${passPercent}% to pass.`}
         </p>
 
         {/* Score Ring / Gauge */}
@@ -80,10 +85,9 @@ export default function ResultsScreen({ quiz, score, total, onRetake, onBackToLi
           </div>
         </div>
 
-        {/* Gamification Rewards Section */}
+        {/* Rewards Section */}
         {isPassed && rewardResult && (
           <div className="space-y-4 mb-8 animate-fade-in">
-            {/* Points Awarded Card */}
             {rewardResult.pointsAdded > 0 && (
               <div className="glass-card p-4 border border-amber-500/40 bg-amber-500/10 flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -91,31 +95,11 @@ export default function ResultsScreen({ quiz, score, total, onRetake, onBackToLi
                     <Zap className="w-6 h-6" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-bold text-white text-base">+ {rewardResult.pointsAdded} XP Awarded!</h3>
-                    <p className="text-xs text-amber-300/80">Category: {rewardResult.pointsType?.replace('_', ' ')}</p>
+                    <h3 className="font-bold text-white text-base">+ {rewardResult.pointsAdded} XP Earned!</h3>
+                    <p className="text-xs text-amber-300/80">Added to your total XP progress</p>
                   </div>
                 </div>
-                <span className="badge-tag badge-amber text-xs font-extrabold">Points Claimed</span>
-              </div>
-            )}
-
-            {/* Achievement Unlocked Modal Card */}
-            {rewardResult.newBadgeUnlocked && (
-              <div className="glass-card p-5 border-2 border-emerald-500 bg-emerald-500/15 animate-badge-pop text-left relative overflow-hidden">
-                <div className="flex items-center gap-4">
-                  <div className="text-4xl p-3 bg-emerald-500/20 rounded-2xl border border-emerald-500/30">
-                    {rewardResult.newBadgeUnlocked.icon || '🏆'}
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">
-                      NEW BADGE UNLOCKED!
-                    </span>
-                    <h3 className="text-lg font-extrabold text-white">
-                      {rewardResult.newBadgeUnlocked.title}
-                    </h3>
-                    <p className="text-xs text-slate-300">Added to your Badges Vault</p>
-                  </div>
-                </div>
+                <span className="badge-tag badge-amber text-xs font-extrabold">Completed</span>
               </div>
             )}
           </div>

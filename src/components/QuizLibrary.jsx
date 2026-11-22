@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Plus, Eye, Headphones, BookOpen, Layers, Edit, Trash2, Zap, Star, Trophy, Clock, Filter, Download, Upload, Share2, Check } from 'lucide-react';
+import { Play, Plus, Eye, Headphones, BookOpen, Layers, Edit, Trash2, Zap, Star, Trophy, Clock, Filter, Download, Upload, Share2, Check, Mic, Edit3, Image as ImageIcon, Sparkles } from 'lucide-react';
 import { getFavorites, toggleFavorite, getHighScores, exportQuizzesJSON, importQuizzesJSON, generateShareableURL } from '../services/quizStorage';
 
 export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEditQuiz, onDeleteQuiz }) {
@@ -42,7 +42,7 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
     reader.readAsText(file);
   };
 
-  const categories = ['All', 'Favorites', 'Beginner', 'Advanced'];
+  const categories = ['All', 'Favorites', 'Immersion Only', 'Beginner', 'Advanced'];
 
   const filteredQuizzes = quizzes.filter(q => {
     const matchesSearch =
@@ -54,6 +54,9 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
 
     if (selectedCategory === 'Favorites') {
       return favorites.includes(q.id);
+    }
+    if (selectedCategory === 'Immersion Only') {
+      return Boolean(q.targetOnly);
     }
     if (selectedCategory !== 'All') {
       return (q.category || 'Beginner') === selectedCategory;
@@ -132,13 +135,19 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
               <div>
                 {/* Header Badges & Favorite Button */}
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="badge-tag badge-blue font-bold">
-                    {quiz.userLang} ➔ {quiz.targetLang}
-                  </span>
+                  {quiz.targetOnly ? (
+                    <span className="badge-tag bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-emerald-400" /> {quiz.targetLang} Immersion (No Native)
+                    </span>
+                  ) : (
+                    <span className="badge-tag badge-blue font-bold">
+                      {quiz.userLang} ➔ {quiz.targetLang}
+                    </span>
+                  )}
 
                   <div className="flex items-center gap-2">
                     <span className="badge-tag badge-amber font-bold flex items-center gap-1">
-                      <Zap className="w-3 h-3" /> {quiz.gpConfig?.amount || 10} XP
+                      <Zap className="w-3 h-3" /> {quiz.xpAmount || 50} XP
                     </span>
                     <button
                       onClick={(e) => handleToggleFav(e, quiz.id)}
@@ -172,18 +181,85 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
                 </div>
 
                 {/* Question Mix Stats */}
-                <div className="grid grid-cols-3 gap-2 bg-slate-950/40 p-2.5 rounded-xl border border-white/5 mb-6 text-center text-xs">
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-1 bg-slate-950/40 p-2.5 rounded-xl border border-white/5 mb-6 text-center text-xs">
                   <div>
-                    <span className="text-slate-400 block">Visual</span>
-                    <span className="font-bold text-sky-400">{quiz.config?.visual || 0}</span>
+                    <span className="text-slate-400 block text-[9px]">Visual</span>
+                    <span className="font-bold text-sky-400 text-xs">{quiz.config?.visual || 0}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block">Listening</span>
-                    <span className="font-bold text-emerald-400">{quiz.config?.audio || 0}</span>
+                    <span className="text-slate-400 block text-[9px]">Audio</span>
+                    <span className="font-bold text-emerald-400 text-xs">{quiz.config?.audio || 0}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block">Matching</span>
-                    <span className="font-bold text-purple-400">{quiz.config?.matching || 0}</span>
+                    <span className="text-slate-400 block text-[9px]">Match</span>
+                    <span className="font-bold text-indigo-400 text-xs">{quiz.config?.matching || 0}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[9px]">Speech</span>
+                    <span className="font-bold text-amber-400 text-xs">{quiz.config?.speech ?? quiz.config?.speaking ?? 3}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[9px]">Blanks</span>
+                    <span className="font-bold text-purple-400 text-xs">{quiz.config?.blanks ?? 3}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[9px]">Img Speech</span>
+                    <span className="font-bold text-teal-400 text-xs">{quiz.config?.imageSpeech ?? 2}</span>
+                  </div>
+                </div>
+
+                {/* Sub-Quizzes Section */}
+                <div className="mb-5">
+                  <div className="flex items-center justify-between text-xs font-bold text-slate-300 mb-2">
+                    <span className="flex items-center gap-1.5">
+                      <Layers className="w-3.5 h-3.5 text-sky-400" />
+                      Sub-Quizzes ({quiz.subQuizzes?.length || 1})
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-normal">Play individually or combined</span>
+                  </div>
+
+                  <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                    {(quiz.subQuizzes && quiz.subQuizzes.length > 0
+                      ? quiz.subQuizzes
+                      : [{ id: 'sq-1', number: 1, title: 'Core Vocabulary', phrases: quiz.phrases || [], config: quiz.config }]
+                    ).map((sq, idx) => (
+                      <div
+                        key={sq.id || idx}
+                        className="flex items-center justify-between gap-2 p-2 rounded-xl bg-slate-900/60 border border-white/5 hover:border-sky-500/30 transition text-xs"
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="w-6 h-6 rounded-lg bg-sky-500/15 text-sky-300 flex items-center justify-center shrink-0 border border-sky-500/25">
+                            <BookOpen className="w-3 h-3" />
+                          </div>
+                          <div className="min-w-0">
+                            <span className="text-white font-semibold truncate block text-xs">
+                              {sq.title || `Topic ${idx + 1}`}
+                            </span>
+                            <span className="text-[10px] text-slate-400">
+                              {sq.phrases?.length || 0} phrases
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <button
+                            onClick={() => onSelectQuiz(quiz, 'mixed', sq)}
+                            className="btn-outline py-1 px-2.5 text-xs font-bold text-sky-400 border-sky-500/30 hover:bg-sky-500/10 flex items-center gap-1"
+                            title={`Start "${sq.title || 'Sub-Quiz'}"`}
+                          >
+                            <Play className="w-3 h-3 fill-current" /> Play
+                          </button>
+                          <button
+                            onClick={() => onSelectQuiz(quiz, 'image_speech', sq)}
+                            className="btn-outline py-1 px-2 text-[11px] font-bold text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/10 flex items-center gap-1"
+                            title={`Image to Speech for "${sq.title || 'Sub-Quiz'}"`}
+                          >
+                            <ImageIcon className="w-3 h-3" />
+                            <Mic className="w-3 h-3 text-amber-300" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -191,43 +267,71 @@ export default function QuizLibrary({ quizzes, onSelectQuiz, onCreateNew, onEdit
               {/* Quick Practice Modes */}
               <div className="space-y-3">
                 <button
-                  onClick={() => onSelectQuiz(quiz, 'mixed')}
-                  className="btn-primary w-full justify-center text-base py-3 shadow-lg shadow-indigo-500/25"
+                  onClick={() => onSelectQuiz(quiz, 'mixed', null)}
+                  className="btn-primary w-full justify-center text-sm py-3 font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/20"
                 >
-                  <Play className="w-4 h-4 fill-white" /> START MIXED QUIZ
+                  <Play className="w-4 h-4 fill-white" />
+                  <span>Start Full Challenge</span>
+                  <span className="text-[11px] bg-white/20 text-white px-2 py-0.5 rounded-full font-semibold ml-1">
+                    All Units
+                  </span>
                 </button>
 
-                <div className="grid grid-cols-4 gap-1.5 pt-2 border-t border-white/10 text-xs">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-1.5 pt-2 border-t border-white/10 text-xs">
                   <button
-                    onClick={() => onSelectQuiz(quiz, 'visual')}
-                    className="btn-outline justify-center py-2 px-1 text-[11px]"
-                    title="Visual Mode"
+                    onClick={() => onSelectQuiz(quiz, 'visual', null)}
+                    className="btn-outline justify-center py-2 px-1 text-[11px] font-medium"
+                    title="Visual Mode (All Sub-Quizzes)"
                   >
                     <Eye className="w-3.5 h-3.5 text-sky-400" /> Visual
                   </button>
 
                   <button
-                    onClick={() => onSelectQuiz(quiz, 'audio')}
-                    className="btn-outline justify-center py-2 px-1 text-[11px]"
-                    title="Listening Mode"
+                    onClick={() => onSelectQuiz(quiz, 'audio', null)}
+                    className="btn-outline justify-center py-2 px-1 text-[11px] font-medium"
+                    title="Listening Mode (All Sub-Quizzes)"
                   >
                     <Headphones className="w-3.5 h-3.5 text-emerald-400" /> Audio
                   </button>
 
                   <button
-                    onClick={() => onSelectQuiz(quiz, 'text')}
-                    className="btn-outline justify-center py-2 px-1 text-[11px]"
-                    title="Reading Mode"
+                    onClick={() => onSelectQuiz(quiz, 'text', null)}
+                    className="btn-outline justify-center py-2 px-1 text-[11px] font-medium"
+                    title="Reading Mode (All Sub-Quizzes)"
                   >
                     <BookOpen className="w-3.5 h-3.5 text-amber-400" /> Text
                   </button>
 
                   <button
-                    onClick={() => onSelectQuiz(quiz, 'matching')}
-                    className="btn-outline justify-center py-2 px-1 text-[11px]"
-                    title="Matching Mode"
+                    onClick={() => onSelectQuiz(quiz, 'matching', null)}
+                    className="btn-outline justify-center py-2 px-1 text-[11px] font-medium"
+                    title="Matching Mode (All Sub-Quizzes)"
                   >
-                    <Layers className="w-3.5 h-3.5 text-purple-400" /> Match
+                    <Layers className="w-3.5 h-3.5 text-indigo-400" /> Match
+                  </button>
+
+                  <button
+                    onClick={() => onSelectQuiz(quiz, 'speech', null)}
+                    className="btn-outline justify-center py-2 px-1 text-[11px] font-medium border-amber-500/30 text-amber-300 hover:border-amber-400/60"
+                    title="Speech Recognition Quiz Mode (All Sub-Quizzes)"
+                  >
+                    <Mic className="w-3.5 h-3.5 text-amber-400" /> Speech
+                  </button>
+
+                  <button
+                    onClick={() => onSelectQuiz(quiz, 'blanks', null)}
+                    className="btn-outline justify-center py-2 px-1 text-[11px] font-medium border-purple-500/30 text-purple-300 hover:border-purple-400/60"
+                    title="Fill in the Blanks (Cloze Question) Mode (All Sub-Quizzes)"
+                  >
+                    <Edit3 className="w-3.5 h-3.5 text-purple-400" /> Blanks
+                  </button>
+
+                  <button
+                    onClick={() => onSelectQuiz(quiz, 'image_speech', null)}
+                    className="btn-outline justify-center py-2 px-1 text-[11px] font-medium border-emerald-500/30 text-emerald-300 hover:border-emerald-400/60"
+                    title="Image to Speech Match Quiz Mode (All Sub-Quizzes)"
+                  >
+                    <ImageIcon className="w-3.5 h-3.5 text-emerald-400" /> Img Speech
                   </button>
                 </div>
 
