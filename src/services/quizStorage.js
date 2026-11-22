@@ -343,35 +343,6 @@ export const parseSharedQuizURL = () => {
   return null;
 };
 
-// Export & Import Quizzes (JSON File Backup)
-export const exportQuizzesJSON = () => {
-  const quizzes = getQuizzes();
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(quizzes, null, 2));
-  const downloadAnchor = document.createElement('a');
-  downloadAnchor.setAttribute("href", dataStr);
-  downloadAnchor.setAttribute("download", `language_quizzes_backup_${Date.now()}.json`);
-  document.body.appendChild(downloadAnchor);
-  downloadAnchor.click();
-  downloadAnchor.remove();
-};
-
-export const importQuizzesJSON = (jsonString) => {
-  try {
-    const imported = JSON.parse(jsonString);
-    if (Array.isArray(imported)) {
-      const existing = getQuizzes();
-      const existingIds = new Set(existing.map(q => q.id));
-      const newItems = imported.filter(q => !existingIds.has(q.id));
-      const merged = [...newItems, ...existing];
-      localStorage.setItem(STORAGE_KEY_QUIZZES, JSON.stringify(merged));
-      return merged;
-    }
-  } catch (e) {
-    alert('Invalid JSON File.');
-  }
-  return getQuizzes();
-};
-
 // Favorites Service
 export const getFavorites = () => {
   const data = localStorage.getItem(STORAGE_KEY_FAVORITES);
